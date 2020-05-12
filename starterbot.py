@@ -50,7 +50,7 @@ def handle_command(command, channel):
     if len(command) < 2:
         response = "Sure...write some more text then I can do that!"
     else:
-        response = generate_unconditional_samples.sample_model(nsamples=1, length=min(3*len(command), 500), top_k=40, command=command)[0]
+        response = generate_unconditional_samples.sample_model(length=min(3*len(command), 500), command=command)[0]
 
 
     # Sends the response back to the channel

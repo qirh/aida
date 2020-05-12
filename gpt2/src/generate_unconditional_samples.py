@@ -10,11 +10,11 @@ from . import model, sample, encoder
 def sample_model(
     model_name='2019-03-06-gwern-gpt2-poetry-projectgutenberg-network519407',
     seed=None,
-    nsamples=0,
+    nsamples=2,
     batch_size=1,
     length=None,
-    temperature=1,
-    top_k=0,
+    temperature=0.9,
+    top_k=40,
     command=None
 ):
     """
