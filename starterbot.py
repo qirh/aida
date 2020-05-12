@@ -67,9 +67,7 @@ if __name__ == "__main__":
         starterbot_id = slack_client.api_call("auth.test")["user_id"]
         while True:
             command, channel = parse_bot_commands(slack_client.rtm_read())
-            print('000', command, channel)
             if command:
-                print('111')
                 handle_command(command, channel)
             time.sleep(RTM_READ_DELAY)
     else:
