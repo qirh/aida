@@ -43,15 +43,7 @@ def handle_command(command, channel):
     """
         Executes bot command if the command is known
     """
-    print('here', command, channel)
-
-    # This is where you start to implement more commands!
-    if len(command) < 2:
-        print('if')
-        response = "Sure...write some more text then I can do that!"
-    else:
-        print('else')
-        response = generate_unconditional_samples.sample_model(length=min(3*len(command), 500), command=command)[0]
+    response = generate_unconditional_samples.sample_model(length=min(3*len(command), 500), command=command)[0]
 
 
     # Sends the response back to the channel
