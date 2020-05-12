@@ -1,14 +1,15 @@
 # https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
+# https://github.com/odomojuli/slack-gpt2-poetry
 
 import os
 import time
 import re
 from slackclient import SlackClient
-
-
-# instantiate Slack client
+import sys
+from gpt2.src import generate_unconditional_samples
+# instantiate Slackk client
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-# starterbot's user ID in Slack: value is assigned after the bot starts up
+# starterbot's user ID in Slack: value is ssigned after the bot starts up
 starterbot_id = None
 
 # constants
@@ -43,20 +44,20 @@ def handle_command(command, channel):
         Executes bot command if the command is known
     """
     # Default response is help text for the user
-    default_response = "Not sure what you mean. Try *{}*.".format(EXAMPLE_COMMAND)
+    response = "Not sure what you mean. Try *{}*.".format(EXAMPLE_COMMAND)
 
-    # Finds and executes the given command, filling in response
-    response = None
     # This is where you start to implement more commands!
-    if command.startswith(EXAMPLE_COMMAND):
-        response = "Sure...write some more code then I can do that!"
+    if len(command) < 2:
+        response = "Sure...write some more text then I can do that!"
+    else:
+        response = generate_unconditional_samples.sample_model(nsamples=1, length=min(3*len(command), 300), top_k=40, command=command)[0]
+
 
     # Sends the response back to the channel
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
-        text=response or default_response
-    )
+        text=response)
 
 if __name__ == "__main__":
     if slack_client.rtm_connect(with_team_state=False):
