@@ -50,7 +50,7 @@ def handle_command(command, channel):
     if len(command) < 2:
         response = "Sure...write some more text then I can do that!"
     else:
-        response = generate_unconditional_samples.sample_model(nsamples=1, length=min(3*len(command), 300), top_k=40, command=command)[0]
+        response = generate_unconditional_samples.sample_model(nsamples=1, length=min(3*len(command), 500), top_k=40, command=command)[0]
 
 
     # Sends the response back to the channel
@@ -62,7 +62,6 @@ def handle_command(command, channel):
 if __name__ == "__main__":
     if slack_client.rtm_connect(with_team_state=False):
         print("Starter Bot connected and running!")
-        # Read bot's user ID by calling Web API method `auth.test`
         starterbot_id = slack_client.api_call("auth.test")["user_id"]
         while True:
             command, channel = parse_bot_commands(slack_client.rtm_read())
