@@ -8,7 +8,7 @@ import tensorflow as tf
 from . import model, sample, encoder
 
 def sample_model(
-    model_name='2019-03-06-gwern-gpt2-poetry-projectgutenberg-network519407',
+    model_name='model_poetry',
     seed=None,
     nsamples=2,
     batch_size=1,
