@@ -4,9 +4,11 @@ import fire
 import json
 import os
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 import model, sample, encoder
+
+tf.disable_v2_behavior()
 
 def interact_model(
     model_name='117M',
@@ -84,4 +86,3 @@ def interact_model(
 
 if __name__ == '__main__':
     fire.Fire(interact_model)
-
